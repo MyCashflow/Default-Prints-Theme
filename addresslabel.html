@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{%Order} {OrderNumber}</title>
+	<style type="text/css">
+		* { margin: 0; padding: 0; border: 0; }
+		@page {
+			size: A5 landscape;
+			margin: 0; padding: 0;
+		}
+		body {
+			color: #000; background: #FFF;
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size: 12pt; line-height: 18pt;
+			text-align: right;
+		}
+		html, body {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		.LogoLink {
+			float: left;
+			display: block;
+			text-align: left;
+			padding: 10mm;
+		}
+		.NoLogoImage {
+			display: none;
+			margin: 0 0 18pt;
+		}
+		img {
+			display: block;
+			margin: 0 auto 18pt; padding: 0;
+			prince-image-resolution: 300;
+			max-height: 30mm;
+			max-width: 60mm;
+		}
+		.Content {
+			padding: 40mm 10mm 10mm;
+			text-align: right;
+			font-size: 16pt;
+			line-height: 24pt;
+		}
+		.Content p {
+			word-break: break-all; margin: 0;
+		}
+		.Sender {
+			position: absolute;
+			left: 10mm; top: 45mm;
+			text-align: left;
+			font-size: 11pt;
+			line-height: 14pt;
+		}
+		.Receiver {
+			position: absolute;
+			right: 10mm; top: 75mm;
+			text-align: left;
+			font-size: 11pt;
+			line-height: 14pt;
+		}
+		h2 {
+			font-size: 11pt;
+			margin: 0 0 14pt;
+		}
+	</style>
+</head>
+<body>
+	{Logo}
+	<div class="Content">
+		<div class="Receiver">
+		<p>
+			{OrderShippingCompany(after:'<br />')}
+			{OrderShippingName}
+			{OrderShippingAddress(before:'<br>')}
+			{OrderShippingZip(before:'<br>')} {OrderShippingCity}
+			{OrderShippingCountry(before:'<br>')}
+		</p>
+		</div>
+		<div class="Sender">
+			<h2>{%Sender}</h2>
+			<p>
+				{ContactCompany(after:'<br>')}
+				{ContactStreetAddress1(after:'{ContactStreetAddress2(before:',&nbsp;')}<br>')}
+				{ContactZip} {ContactCity(after:'<br>')}
+				{ContactCountry}
+			</p>
+		</div>
+	</div>
+</body>
+</html>
