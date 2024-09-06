@@ -1,0 +1,140 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{ShopName}</title>
+		<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+		<style>
+			:root {
+				--page-height: 39mm;
+				--page-margin: 2mm;
+				--page-width: 40mm;
+
+				--font-size-base: .23cm;
+				--font-weight-normal: 500;
+				--font-weight-bold: 700;
+				--font-weight-xbold: 800;
+
+				--line-height: 1.2;
+
+				--discount-text-color: #FA0006;
+			}
+
+			html {
+				font-family: "Archivo", Arial, sans-serif;
+				font-size: var(--font-size-base);
+				font-weight: var(--font-weight-normal);
+				line-height: var(--line-height);
+				-prince-image-resolution: 300dpi; 
+			}
+
+			* {
+				border: 0;
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			@page {
+				size: var(--page-width) var(--page-height);
+				margin: var(--page-margin);
+			}
+
+			/* @font-face {
+				font-family: "Archivo";
+				font-style: normal;
+				font-weight: 500;
+				src: url("{ThemeUrl}/css/fonts/Archivo-Medium.ttf") format("truetype");
+			}
+
+			@font-face {
+				font-family: "Archivo";
+				font-style: normal;
+				font-weight: 700;
+				src: url("{ThemeUrl}/css/fonts/Archivo-Bold.ttf") format("truetype");
+			}
+
+			@font-face {
+				font-family: "Archivo";
+				font-style: normal;
+				font-weight: 800;
+				src: url("{ThemeUrl}/css/fonts/Archivo-ExtraBold.ttf") format("truetype");
+			} */
+
+			.PriceTag {
+				height: calc(var(--page-height) - (var(--page-margin) * 2));
+			}
+
+			.Content {
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+			}
+
+			.TruncateName {
+				--font-size-increase: 0;
+				--max-rows: 2;
+				--max-height: calc((var(--font-size-base) + var(--font-size-increase)) * var(--line-height));
+				font-size: calc(var(--font-size-base) + var(--font-size-increase));
+				max-height: calc(var(--max-height) * var(--max-rows));
+				overflow: hidden;
+			}
+
+			.ProductName {
+				--font-size-increase: 0.17cm;
+				--max-rows: 3;
+				font-weight: var(--font-weight-bold);
+			}
+
+			.ProductVariationName {
+				--font-size-increase: 0.1cm;
+				--max-rows: 2;
+				font-weight: var(--font-weight-normal);
+			}
+
+			.Barcode {
+				margin-top: auto;
+			}
+
+			@media screen {
+				.PriceTag {
+					box-sizing: content-box;
+					border: 1px solid #ddd;
+					width: var(--page-width);
+					margin: var(--page-margin);
+					padding: var(--page-margin);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		{Products(
+			helper: {{
+				<article class="PriceTag {ProductClass}">
+					<div class="Content">
+							<header>
+								<h1 class="ProductName TruncateName">{ProductName}</h1>
+								{VariationName(
+									before: '<p class="ProductVariationName TruncateName">',
+									after: '</p>'
+								)}
+								{ProductCode(
+									before: '<p class="ProductCode">',
+									after: '</p>'
+								)}
+							</header>
+							<div class="Barcode">
+								{Barcode(
+									type: 'ean',
+									value: '{VariationArticleNumber(or: '{ProductArticleNumber}')}',
+									before: '<img src="',
+									after: '" style="width: 100%; object-fit: contain;" />'
+								)}
+								<div class="BarcodeContent">{VariationArticleNumber(or: '{ProductArticleNumber}')}</div>
+							</div>
+					</div>
+				</article>
+			}}
+		)}
+	</body>
+</html>
