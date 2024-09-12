@@ -1,268 +1,197 @@
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>{ShopName}</title>
-		<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-		<style>
-			:root {
-				--page-height: 38mm;
-				--page-margin: 2mm;
-				--page-width: 90mm;
+<head>
+<meta charset="utf-8">
+<title>{ShopName}</title>
+<link rel="stylesheet" href="{ThemeUrl}/css/labels-base.css?date=20210304">
+<style>
+	:root {
+		--page-width: 90mm;
+		--page-height: 38mm;
+		--page-margin: 2mm;
+	}
 
-				--font-size-base: .23cm;
-				--font-weight-normal: 500;
-				--font-weight-bold: 700;
-				--font-weight-xbold: 800;
+	.LeftSideSection {
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		width: 50%;
+	}
 
-				--line-height: 1.2;
+	.RightSideSection {
+		align-items: flex-end;
+		bottom: 0;
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		right: 0;
+	}
 
-				--discount-text-color: #FA0006;
-			}
+	.TruncateName {
+		--font-size-increase: 0;
+		--max-rows: 2;
+		--max-height: calc((var(--font-size-base) + var(--font-size-increase)) * var(--line-height));
+		font-size: calc(var(--font-size-base) + var(--font-size-increase));
+		max-height: calc(var(--max-height) * var(--max-rows));
+		overflow: hidden;
+	}
 
-			html {
-				font-family: "Archivo", Arial, sans-serif;
-				font-size: var(--font-size-base);
-				font-weight: var(--font-weight-normal);
-				line-height: var(--line-height);
-				-prince-image-resolution: 300dpi;
-			}
+	.ProductName {
+		--font-size-increase: 0.17cm;
+		--max-rows: 2;
+		font-weight: var(--font-weight-bold);
+	}
 
-			* {
-				border: 0;
-				box-sizing: border-box;
-				margin: 0;
-				padding: 0;
-			}
+	.ProductVariationName {
+		--font-size-increase: 0.1cm;
+		--max-rows: 1;
+		font-weight: var(--font-weight-normal);
+		max-width: calc(100% - 3cm);
+	}
 
-			@page {
-				size: var(--page-width) var(--page-height);
-				margin: var(--page-margin);
-			}
+	.Price {
+		display: inline-flex;
+		font-size: calc(var(--font-size-base) + .75cm);
+		font-weight: var(--font-weight-xbold);
+		line-height: 1;
+	}
 
-			/* @font-face {
-				font-family: "Archivo";
-				font-style: normal;
-				font-weight: 500;
-				src: url("{ThemeUrl}/css/fonts/Archivo-Medium.ttf") format("truetype");
-			}
+	.DiscountPrice {
+		color: var(--discount-text-color);
+	}
 
-			@font-face {
-				font-family: "Archivo";
-				font-style: normal;
-				font-weight: 700;
-				src: url("{ThemeUrl}/css/fonts/Archivo-Bold.ttf") format("truetype");
-			}
+	.Price .PriceFrom {
+		align-self: flex-end;
+		font-size: .25em;
+		margin: 0 1mm 2.5mm 0;
+	}
 
-			@font-face {
-				font-family: "Archivo";
-				font-style: normal;
-				font-weight: 800;
-				src: url("{ThemeUrl}/css/fonts/Archivo-ExtraBold.ttf") format("truetype");
-			} */
+	.Price .DecimalSeparator {
+		display: none;
+	}
 
-			.PriceTag {
-				height: calc(var(--page-height) - (var(--page-margin) * 2));
-			}
+	.Price .PriceDecimals {
+		align-self: flex-start;
+		font-size: .5em;
+		margin-left: 0;
+		margin-top: 1mm;
+	}
 
-			.Content {
-				position: relative;
-				display: flex;
-				flex-direction: column;
-				height: 100%;
-			}
+	.PriceVat {
+		bottom: 0;
+		font-size: 1em;
+		position: absolute;
+		width: max-content;
+	}
 
-			.LeftSideSection {
-				bottom: 0;
-				left: 0;
-				position: absolute;
-				width: 50%;
-			}
+	.RightSideSection .Barcode {
+		margin: .05cm 0;
+	}
 
-			.RightSideSection {
-				align-items: flex-end;
-				bottom: 0;
-				display: flex;
-				flex-direction: column;
-				position: absolute;
-				right: 0;
-			}
+	.BarcodeContent {
+		text-align: right;
+	}
 
-			.TruncateName {
-				--font-size-increase: 0;
-				--max-rows: 2;
-				--max-height: calc((var(--font-size-base) + var(--font-size-increase)) * var(--line-height));
-				font-size: calc(var(--font-size-base) + var(--font-size-increase));
-				max-height: calc(var(--max-height) * var(--max-rows));
-				overflow: hidden;
-			}
+	.BarcodeQRWrapper {
+		align-items: center;
+		display: flex;
+	}
 
-			.ProductName {
-				--font-size-increase: 0.17cm;
-				--max-rows: 2;
-				font-weight: var(--font-weight-bold);
-			}
-
-			.ProductVariationName {
-				--font-size-increase: 0.1cm;
-				--max-rows: 1;
-				font-weight: var(--font-weight-normal);
-				max-width: calc(100% - 3cm);
-			}
-
-			.Price {
-				display: inline-flex;
-				font-size: calc(var(--font-size-base) + .75cm);
-				font-weight: var(--font-weight-xbold);
-				line-height: 1;
-			}
-
-			.DiscountPrice {
-				color: var(--discount-text-color);
-			}
-
-			.Price .PriceFrom {
-				align-self: flex-end;
-				font-size: .25em;
-				margin: 0 1mm 2.5mm 0;
-			}
-
-			.Price .DecimalSeparator {
-				display: none;
-			}
-
-			.Price .PriceDecimals {
-				align-self: flex-start;
-				font-size: .5em;
-				margin-left: 0;
-				margin-top: 1mm;
-			}
-
-			.PriceVat {
-				bottom: 0;
-				font-size: 1em;
-				position: absolute;
-  				width: max-content;
-			}
-
-			.RightSideSection .Barcode {
-				margin: .05cm 0;
-			}
-
-			.BarcodeContent {
-				text-align: right;
-			}
-
-			.BarcodeQRWrapper {
-				align-items: center;
-				display: flex;
-			}
-
-			.BarcodeQRWrapper .BarcodeQR {
-				margin-right: .2cm;
-			}
-
-			@media screen {
-				.PriceTag {
-					box-sizing: content-box;
-					border: 1px solid #ddd;
-					width: var(--page-width);
-					margin: var(--page-margin);
-					padding: var(--page-margin);
-				}
-			}
-		</style>
-	</head>
-	<body>
-		{Products(
-			helper: '{{
-				<article class="PriceTag {ProductClass}">
-					<div class="Content">
-						<header>
-							<h1 class="ProductName TruncateName">{ProductName}</h1>
-							{VariationName(
-								before: '<p class="ProductVariationName TruncateName">',
-								after: '</p>'
-							)}
-							{ProductCode(
-								before: '<p class="ProductCode">',
-								after: '</p>'
-							)}
-						</header>
-						<div class="LeftSideSection">
-							<div class="BarcodeQRWrapper">
-								{Barcode(
-									type: 'qr',
-									value: '{ShopUrl}/product/{ProductId}',
-									before: '<div class="Barcode"><img class="BarcodeQR" src="',
-									after: '" style="height: 1cm; width: 1cm; object-fit: contain;" /></div>'
-								)}
-								{Text(
-									before: '<span style="max-width: 23ch;">',
-									after: '</span>',
-									code: 'LabelScanCodeForMoreInformation'
-								)}
-							</div>
-						</div>
-						<div class="RightSideSection">
-							<p class="ProductPrice">
-								{Helper(
-									case: 'IsDiscountProduct',
-									file: '{{
-										{ProductPrice(
-											html: true,
-											currencysymbol: false,
-											thousandssep: '<span class="ThousandSeparator"></span>',
-											before: '<span class="Price DiscountPrice">',
-											after: '</span>'
-										)}
-									}}',
-									or: '
-									{ProductPrice(
-										html: true,
-										currencysymbol: false,
-										thousandssep: '<span class="ThousandSeparator"></span>',
-										before: '<span class="Price">',
-										after: '</span>'
-									)}'
-								)}
-								{Helper(
-									case: 'VatFreePricing',
-									file: '{{
-										<span class="PriceVat">{%VAT} 0 %</span>
-									}}'
-								)}
-							</p>
-							{Helper(
-								case: 'IsDiscountProduct',
-								file: '{{
-									{ProductListPrice(
-										html: false,
-										currencysymbol: true,
-										thousandssep: '<span class="ThousandSeparator"></span>',
-										before: '<div class="ListPrice">{%OldPrice} ',
-										after: '</div>'
-									)}
-									{ProductComparePrice(
-										mode: 'comparison',
-										html: false,
-										currencysymbol: true,
-										thousandssep: '<span class="ThousandSeparator"></span>',
-										before: '<div class="PriceComparison">{%LowestCampaignPrice} ',
-										after: '</div>'
-									)}
-								}}'
-							)}
-							{Barcode(
-								type: 'ean',
-								value: '{VariationArticleNumber(or: '{ProductArticleNumber}')}',
-								before: '<div class="Barcode"><img class="BarcodeEAN" src="',
-								after: '" style="height: .5cm; object-fit: contain;" /></div>'
-							)}
-							<div class="BarcodeContent">{VariationArticleNumber(or: '{ProductArticleNumber}')}</div>
-						</div>
+	.BarcodeQRWrapper .BarcodeQR {
+		margin-right: .2cm;
+	}
+</style>
+</head>
+<body>
+{Products(
+	helper: '{{
+		<article class="Page PriceTag {ProductClass}">
+			<div class="Content">
+				<header>
+					<h1 class="ProductName TruncateName">{ProductName}</h1>
+					{VariationName(
+						before: '<p class="ProductVariationName TruncateName">',
+						after: '</p>'
+					)}
+					{ProductCode(
+						before: '<p class="ProductCode">',
+						after: '</p>'
+					)}
+				</header>
+				<div class="LeftSideSection">
+					<div class="BarcodeQRWrapper">
+						{Barcode(
+							type: 'qr',
+							value: '{ShopUrl}/product/{ProductId}',
+							before: '<div class="Barcode"><img class="BarcodeQR" src="',
+							after: '" style="height: 1cm; width: 1cm; object-fit: contain;" /></div>'
+						)}
+						{Text(
+							before: '<span style="max-width: 23ch;">',
+							after: '</span>',
+							code: 'LabelScanCodeForMoreInformation'
+						)}
 					</div>
-				</article>
-			}}'
-		)}
-	</body>
+				</div>
+				<div class="RightSideSection">
+					<p class="ProductPrice">
+						{Helper(
+							case: 'IsDiscountProduct',
+							file: '{{
+								{ProductPrice(
+									html: true,
+									currencysymbol: false,
+									thousandssep: '<span class="ThousandSeparator"></span>',
+									before: '<span class="Price DiscountPrice">',
+									after: '</span>'
+								)}
+							}}',
+							or: '
+							{ProductPrice(
+								html: true,
+								currencysymbol: false,
+								thousandssep: '<span class="ThousandSeparator"></span>',
+								before: '<span class="Price">',
+								after: '</span>'
+							)}'
+						)}
+						{Helper(
+							case: 'VatFreePricing',
+							file: '{{
+								<span class="PriceVat">{%VAT} 0 %</span>
+							}}'
+						)}
+					</p>
+					{Helper(
+						case: 'IsDiscountProduct',
+						file: '{{
+							{ProductListPrice(
+								html: false,
+								currencysymbol: true,
+								thousandssep: '<span class="ThousandSeparator"></span>',
+								before: '<div class="ListPrice">{%OldPrice} ',
+								after: '</div>'
+							)}
+							{ProductComparePrice(
+								mode: 'comparison',
+								html: false,
+								currencysymbol: true,
+								thousandssep: '<span class="ThousandSeparator"></span>',
+								before: '<div class="PriceComparison">{%LowestCampaignPrice} ',
+								after: '</div>'
+							)}
+						}}'
+					)}
+					{Barcode(
+						type: 'ean',
+						value: '{VariationArticleNumber(or: '{ProductArticleNumber}')}',
+						before: '<div class="Barcode"><img class="BarcodeEAN" src="',
+						after: '" style="height: .5cm; object-fit: contain;" /></div>'
+					)}
+					<div class="BarcodeContent">{VariationArticleNumber(or: '{ProductArticleNumber}')}</div>
+				</div>
+			</div>
+		</article>
+	}}'
+)}
+</body>
 </html>
