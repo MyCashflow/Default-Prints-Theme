@@ -1,0 +1,428 @@
+<html lang="{CurrentLanguageCode}">
+	<head>
+		<meta charset="utf-8">
+		<title>{ShopName}</title>
+		<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+		<style>
+			:root {
+				--page-height: 297mm;
+				--page-margin: 10mm;
+				--page-width: 210mm;
+
+				--font-size-base: .4cm;
+				--font-weight-normal: 500;
+				--font-weight-bold: 700;
+				--font-weight-xbold: 800;
+
+				--line-height: 1.5;
+				--paragraph-margin: .2cm;
+
+				--discount-text-color: #FA0006;
+			}
+
+			html {
+				font-family: "Archivo", Arial, sans-serif;
+				font-size: var(--font-size-base);
+				font-weight: var(--font-weight-normal);
+				line-height: var(--line-height);
+				-prince-image-resolution: 300dpi;
+			}
+
+			html:not([lang="fi"]) .Title {
+				display: none;
+			}
+
+			* {
+				border: 0;
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			img {
+				display: inline-block;
+				max-height: 100%;
+				max-width: 100%;
+				vertical-align: middle;
+			}
+
+			hr {
+				background-color: #eee;
+				border: 0;
+				display: block;
+				height: 1px;
+				margin: calc(var(--paragraph-margin) * 4) 0;
+			}
+
+
+			@page {
+				size: var(--page-width) var(--page-height);
+				margin: var(--page-margin);
+			}
+
+			/* @font-face {
+				font-family: "Archivo";
+				font-style: normal;
+				font-weight: 500;
+				src: url("{ThemeUrl}/css/fonts/Archivo-Medium.ttf") format("truetype");
+			}
+
+			@font-face {
+				font-family: "Archivo";
+				font-style: normal;
+				font-weight: 700;
+				src: url("{ThemeUrl}/css/fonts/Archivo-Bold.ttf") format("truetype");
+			}
+
+			@font-face {
+				font-family: "Archivo";
+				font-style: normal;
+				font-weight: 800;
+				src: url("{ThemeUrl}/css/fonts/Archivo-ExtraBold.ttf") format("truetype");
+			} */
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				font-size: var(--font-size-base);
+				line-height: 1.2;
+			}
+
+			.ProductPrintOut {
+				height: calc(var(--page-height) - (var(--page-margin) * 2));
+			}
+
+			.Content {
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+			}
+
+			.ProductName {
+				font-size: calc(var(--font-size-base) + 0.2cm);
+				font-weight: var(--font-weight-bold);
+				margin-bottom: var(--paragraph-margin);
+			}
+
+			.ShopLogo {
+				align-items: center;
+				display: flex;
+				height: 2cm;
+				justify-content: flex-start;
+				margin-bottom: var(--paragraph-margin);
+				width: 6cm;
+			}
+
+			.ShopLogo img {
+				object-fit: contain;
+			}
+
+			.DiscountLabel {
+				background-color: var(--discount-text-color);
+				color: #fff;
+				display: block;
+				margin-bottom: var(--paragraph-margin);
+				padding: .1cm .25cm;
+				text-transform: uppercase;
+				width: max-content;
+			}
+
+			.ProductPrices > span:not(:last-child)::after {
+				content: ', ';
+			}
+
+			.ProductPrice {
+				margin-bottom: var(--paragraph-margin);
+			}
+
+			.Price {
+				display: inline-flex;
+				font-size: calc(var(--font-size-base) + .9cm);
+				font-weight: var(--font-weight-xbold);
+				line-height: 1;
+			}
+
+			.DiscountPrice {
+				color: var(--discount-text-color);
+			}
+
+			.Price .PriceFrom {
+				align-self: flex-end;
+				font-size: .5em;
+				margin: 0 1mm 1mm 0;
+			}
+
+			.PriceVat {
+				bottom: 0;
+				font-size: 1em;
+				position: absolute;
+				width: max-content;
+			}
+
+			.ProductInformation {
+				border-top: 1px solid #eee;
+				margin-top: calc(var(--paragraph-margin) * 4);
+				padding-top: calc(var(--paragraph-margin) * 4);
+			}
+
+			.ProductInformation h2 {
+				margin-bottom: var(--paragraph-margin);
+			}
+
+			.ProductDescription {
+				max-height: 10cm;
+				overflow: hidden;
+			}
+
+			.ProductDescription p,
+			.ProductDescription h1,
+			.ProductDescription h2,
+			.ProductDescription h3,
+			.ProductDescription h4,
+			.ProductDescription h5,
+			.ProductDescription h6,
+			.ProductDescription ul,
+			.ProductDescription ol,
+			.ProductDescription dl,
+			.ProductDescription table,
+			.ProductDescription figure {
+				margin-bottom: var(--paragraph-margin);
+			}
+
+			.ProductImage {
+				align-items: center;
+				display: flex;
+				height: 8cm;
+				justify-content: center;
+				margin-bottom: var(--paragraph-margin);
+				width: 8cm;
+			}
+
+			.ProductImage img {
+				object-fit: contain;
+			}
+
+			.ProductCategories > span:not(:last-child)::after {
+				content: ', ';
+			}
+
+			.ProductDetails ul {
+				list-style: none;
+			}
+
+			.ProductFooter {
+				align-items: center;
+				display: flex;
+				margin-top: auto;
+			}
+
+			.ProductFooter > * {
+				margin: 0;
+			}
+
+			.BarcodeQRWrapper {
+				align-items: center;
+				display: flex;
+				flex: 1;
+			}
+
+			.BarcodeQRWrapper .Barcode {
+				width: 15%;
+				margin-right: var(--paragraph-margin);
+			}
+
+			[class*="Columns-"] {
+				--gap: .5cm;
+				display: flex;
+			}
+
+			.Columns-2 > * {
+				flex: 0 0 calc(50% - (var(--gap) / 2));
+			}
+
+			.Columns-2 > :first-child {
+				margin-right: calc(var(--gap) / 2);
+			}
+
+			.Columns-2 > :last-child {
+				margin-left: calc(var(--gap) / 2);
+			}
+
+			dt {
+				display: inline;
+				font-weight: bold;
+			}
+
+			dt::after {
+				content: ': ';
+			}
+
+			dd {
+				display: inline;
+			}
+
+			dd + dd::before {
+				content: ', ';
+			}
+
+			dd + dt:before {
+				clear: both;
+				content: '';
+				display: block;
+				height: 0;
+			}
+
+			@media screen {
+				.ProductPrintout {
+					box-sizing: content-box;
+					border: 1px solid #ddd;
+					width: var(--page-width);
+					margin: var(--page-margin);
+					padding: var(--page-margin);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		{Products(
+			helper: '{{
+				<article class="ProductPrintOut {ProductClass}">
+					<div class="Content">
+						<header>
+							<div class="ShopLogo">
+								<img src="{LogoUrl(width: '480')}" alt="{ShopName}">
+							</div>
+							<h1 class="ProductName">{ProductName}</h1>
+						</header>
+						<main>
+							<div class="ProductPrices">
+								<p class="ProductPrice">
+									{Helper(
+										case: 'IsDiscountProduct',
+										file: '{{
+											<span class="DiscountLabel">{%Discount}</span>
+											{ProductPrice(
+												currencysymbol: 'true',
+												thousandssep: '<span class="ThousandSeparator"></span>',
+												before: '<span class="Price DiscountPrice">',
+												after: '</span>'
+											)}
+										}}',
+										or: '
+										{ProductPrice(
+											currencysymbol: 'true',
+											thousandssep: '<span class="ThousandSeparator"></span>',
+											before: '<span class="Price">',
+											after: '</span>'
+										)}'
+									)}
+									{Helper(
+										case: 'VatFreePricing',
+										file: '{{
+											<span class="PriceVat">{%VAT} 0 %</span>
+										}}'
+									)}
+								</p>
+								{Helper(
+									case: 'IsDiscountProduct',
+									file: '{{
+										{ProductPrice(
+											currencysymbol: 'true',
+											before: '<span class="CampaignPrice">{%CampaignPrice}&#32;',
+											after: '</span>'
+										)}
+										{ProductListPrice(
+											currencysymbol: 'true',
+											before: '<span class="ListPrice">{%OldPrice}&#32;',
+											after: '</span>'
+										)}
+										{ProductComparePrice(
+											mode: 'comparison',
+											currencysymbol: 'true',
+											before: '<span class="PriceComparison">{%LowestCampaignPrice}&#32;',
+											after: '</span>'
+										)}
+									}}'
+								)}
+							</div>
+							{ProductCampaign(
+								helper: '{{
+									{CampaignTime(
+										before: '<p>{%CampaignTime}:&#32;',
+										after: '</p>'
+									)}
+								}}'
+							)}
+							<div class="ProductInformation">
+								<div class="Columns-2">
+									<div class="ProductImage">
+										<img src="{ProductImageUrl(width: '1200')}" alt="{ProducImageCaption(html: false)}">
+									</div>
+									<div class="ProductDetails">
+										<h2 class="Title">Tuotetiedot</h2>
+										<ul>
+											{VariationName(
+												before: '<li class="ProductVariationName">{%Variation}:&#32;',
+												after: '</li>'
+											)}
+											{ProductCategories(
+												before: '<li class="ProductCategories">{%Category}:&#32;',
+												after: '</li>',
+												helper: '{{
+													<span>{CategoryName}</span>
+												}}'
+											)}
+											{ProductBrandName(
+												before: '<li class="ProductBrand">{%Brand}&#32;',
+												after: '</li>'
+											)}
+											{ProductCode(
+												before: '<li class="ProductCode">{%ProductCode}&#32;',
+												after: '</li>'
+											)}
+										</ul>
+										<hr>
+									</div>
+								</div>
+								<div class="Columns-2">
+									<div class="ProductDescription">
+										{ProductShortDesc(
+											before: '<h2 class="Title">Tuotekuvaus</h2>'
+										)}
+									</div>
+									<div class="ProductFeatures">
+										{ProductFeatures(
+											before: '<h2 class="Title">Tuoteominaisuudet</h2>'
+										)}
+									</div>
+								</div>
+							</div>
+						</main>
+						<footer class="ProductFooter">
+							<div class="BarcodeQRWrapper">
+								{Barcode(
+									type: 'qr',
+									value: '{ShopUrl}/product/{ProductId}',
+									before: '<div class="Barcode"><img class="BarcodeQR" src="',
+									after: '" /></div>'
+								)}
+								{Text(
+									before: '<span>',
+									after: '</span>',
+									code: 'LabelScanCodeForMoreInformation'
+								)}
+							</div>
+							<div class="ShopLogo">
+							  <img src="{LogoUrl(width: '480')}" alt="{ShopName}">
+						    </div>
+						</footer>
+					</div>
+				</article>
+			}}'
+		)}
+	</body>
+</html>
