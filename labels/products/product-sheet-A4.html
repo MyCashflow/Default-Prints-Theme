@@ -1,4 +1,4 @@
-<html lang="{CurrentLanguageCode}">
+<html>
 <head>
 <meta charset="utf-8">
 <title>{ShopName}</title>
@@ -11,10 +11,6 @@
 		--font-size-base: .4cm;
 		--line-height: 1.5;
 		--paragraph-margin: .2cm;
-	}
-
-	html:not([lang="fi"]) .Title {
-		display: none;
 	}
 
 	img {
@@ -293,7 +289,7 @@
 								<img src="{ProductImageUrl(width: '1200')}" alt="{ProducImageCaption(html: false)}">
 							</div>
 							<div class="ProductDetails">
-								<h2 class="Title">Tuotetiedot</h2>
+								<h2 class="Title">{%ProductInformation}</h2>
 								<ul>
 									{VariationName(
 										before: '<li class="ProductVariationName">{%Variation}:&#32;',
@@ -321,12 +317,12 @@
 						<div class="Columns-2">
 							<div class="ProductDescription">
 								{ProductShortDesc(
-									before: '<h2 class="Title">Tuotekuvaus</h2>'
+									before: '<h2 class="Title">{%ProductDescription}</h2>'
 								)}
 							</div>
 							<div class="ProductFeatures">
 								{ProductFeatures(
-									before: '<h2 class="Title">Tuoteominaisuudet</h2>'
+									before: '<h2 class="Title">{%ProductFeatures}</h2>'
 								)}
 							</div>
 						</div>
