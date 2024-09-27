@@ -1,0 +1,66 @@
+:root {
+	--page-height: 38mm;
+	--page-margin: 2mm;
+	--page-width: 90mm;
+
+	--font-size-base: .23cm;
+	--font-weight-normal: 500;
+	--font-weight-bold: 700;
+	--font-weight-xbold: 800;
+
+	--line-height: 1.2;
+
+	--discount-text-color: #FA0006;
+}
+
+* {
+	border: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-family: "Archivo", Arial, sans-serif;
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-normal);
+	line-height: var(--line-height);
+	-prince-image-resolution: 300dpi;
+}
+
+@page {
+	size: var(--page-width) var(--page-height);
+	margin: var(--page-margin);
+}
+
+@font-face {
+	font-family: "Archivo";
+	font-style: normal;
+	font-weight: 500;
+	src: url("../css/fonts/Archivo-Medium.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Archivo";
+	font-style: normal;
+	font-weight: 700;
+	src: url("../css/fonts/Archivo-Bold.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Archivo";
+	font-style: normal;
+	font-weight: 800;
+	src: url("../css/fonts/Archivo-ExtraBold.ttf") format("truetype");
+}
+
+.Page {
+	height: calc(var(--page-height) - (var(--page-margin) * 2));
+}
+
+.Content {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}

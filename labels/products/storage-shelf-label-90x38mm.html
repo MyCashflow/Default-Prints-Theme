@@ -1,0 +1,123 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>{ShopName}</title>
+<link rel="stylesheet" href="{ThemeUrl}/css/labels-base.css?date=20210304">
+<style>
+	:root {
+		--page-width: 90mm;
+		--page-height: 38mm;
+		--page-margin: 2mm;
+	}
+
+	.LeftSideSection {
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		width: 50%;
+	}
+
+	.RightSideSection {
+		align-items: flex-end;
+		bottom: 0;
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		right: 0;
+	}
+
+	.TruncateName {
+		--font-size-increase: 0;
+		--max-rows: 2;
+		--max-height: calc((var(--font-size-base) + var(--font-size-increase)) * var(--line-height));
+		font-size: calc(var(--font-size-base) + var(--font-size-increase));
+		max-height: calc(var(--max-height) * var(--max-rows));
+		overflow: hidden;
+	}
+
+	.ProductName {
+		--font-size-increase: 0.17cm;
+		--max-rows: 2;
+		font-weight: var(--font-weight-bold);
+	}
+
+	.ProductVariationName {
+		--font-size-increase: 0.1cm;
+		--max-rows: 1;
+		font-weight: var(--font-weight-normal);
+	}
+
+	.ProductStockPlace {
+		--font-size-increase: 0.4cm;
+		--max-rows: 1;
+		font-weight: var(--font-weight-bold);
+	}
+
+	.RightSideSection .Barcode {
+		margin: .05cm 0;
+	}
+
+	.BarcodeContent {
+		text-align: right;
+	}
+
+	.BarcodeQRWrapper {
+		align-items: center;
+		display: flex;
+	}
+
+	.BarcodeQRWrapper .BarcodeQR {
+		margin-right: .2cm;
+	}
+</style>
+</head>
+<body>
+{Products(
+	helper: '{{
+		<article class="Page PriceTag {ProductClass}">
+			<div class="Content">
+				<header>
+					<h1 class="ProductName TruncateName">{ProductName}</h1>
+					{VariationName(
+						before: '<p class="ProductVariationName TruncateName">',
+						after: '</p>'
+					)}
+					{ProductCode(
+						before: '<p class="ProductCode">',
+						after: '</p>'
+					)}
+				</header>
+				{ProductStockPlace(
+					before: '<div class="ProductStockPlace TruncateName">',
+					after: '</div>'
+				)}
+				<div class="LeftSideSection">
+					<div class="BarcodeQRWrapper">
+						{Barcode(
+							type: 'qr',
+							value: '{ShopUrl}/product/{ProductId}',
+							before: '<div class="Barcode"><img class="BarcodeQR" src="',
+							after: '" style="height: 1cm; width: 1cm; object-fit: contain;" /></div>'
+						)}
+						{Text(
+							before: '<span style="max-width: 23ch;">',
+							after: '</span>',
+							code: 'LabelScanCodeForMoreInformation'
+						)}
+					</div>
+				</div>
+				<div class="RightSideSection">
+					{Barcode(
+						type: 'ean',
+						value: '{VariationArticleNumber(or: '{ProductArticleNumber}')}',
+						before: '<div class="Barcode"><img class="BarcodeEAN" src="',
+						after: '" style="height: .5cm; object-fit: contain;" /></div>'
+					)}
+					<div class="BarcodeContent">{VariationArticleNumber(or: '{ProductArticleNumber}')}</div>
+				</div>
+			</div>
+		</article>
+	}}'
+)}
+</body>
+</html>
