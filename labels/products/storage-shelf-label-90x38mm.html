@@ -7,7 +7,7 @@
 	:root {
 		--page-width: 90mm;
 		--page-height: 38mm;
-		--page-margin: 2mm;
+		--page-margin: 3mm;
 	}
 
 	.LeftSideSection {
@@ -97,7 +97,7 @@
 							type: 'qr',
 							value: '{ShopUrl}/product/{ProductId}',
 							before: '<div class="Barcode"><img class="BarcodeQR" src="',
-							after: '" style="height: 1cm; width: 1cm; object-fit: contain;" /></div>'
+							after: '" style="height: 1.2cm; width: 1.2cm; object-fit: contain;" /></div>'
 						)}
 						{Text(
 							before: '<span style="max-width: 23ch;">',
@@ -111,7 +111,7 @@
 						type: 'ean',
 						value: '{VariationArticleNumber(or: '{ProductArticleNumber}')}',
 						before: '<div class="Barcode"><img class="BarcodeEAN" src="',
-						after: '" style="height: .5cm; object-fit: contain;" /></div>'
+						after: '" style="height: .7cm; object-fit: contain;" /></div>'
 					)}
 					<div class="BarcodeContent">{VariationArticleNumber(or: '{ProductArticleNumber}')}</div>
 				</div>
