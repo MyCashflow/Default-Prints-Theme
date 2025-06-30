@@ -89,6 +89,20 @@
 		after: '
 					</tbody>
 					<tfoot>
+						{OrderDiscounts(
+							helper: '{{
+								<tr class="CartTotal">
+									<th scope="row" colspan="3">
+										{DiscountLabel(after: ':')} {DiscountName}<br>
+										<small>{%VAT}&nbsp;{DiscountTaxRate(after:'%')}</small>
+									</th>
+									<td class="CartTotal">
+										{OrderDiscount(before: '-')}<br />
+										<small>{DiscountTax(before: '-')}</small>
+									</td>
+								</tr>
+							}}'
+						)}
 						<tr class="CartTotal">
 							<th scope="row" colspan="4">{%CheckoutProductsTotal} <br><small>{%VAT} {OrderTaxRate(after:'%')}</small></th>
 							<td class="CartTotal">

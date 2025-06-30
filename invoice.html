@@ -104,6 +104,20 @@
 							before: '<tr class="CartTotal"><th scope="row" colspan="4">{%PaymentCosts}: {OrderPaymentMethod(show_price: 'false')}<br><small>{%VAT}&nbsp;{OrderPaymentCostsTaxRate(after:'%')}</small></th><td class="CartTotal">',
 							after: '<br><small>{OrderPaymentCostsTax}</small></td></tr>'
 						)}
+						{OrderDiscounts(
+							helper: '{{
+								<tr class="CartTotal">
+									<th scope="row" colspan="4">
+										{DiscountLabel(after: ':')} {DiscountName}<br>
+										<small>{%VAT}&nbsp;{DiscountTaxRate(after:'%')}</small>
+									</th>
+									<td class="CartTotal">
+										{OrderDiscount(before: '-')}<br />
+										<small>{DiscountTax(before: '-')}</small>
+									</td>
+								</tr>
+							}}'
+						)}
 						<tr class="CartTotal" id="FullTotal">
 							<th scope="row" colspan="4">{%Total} <br><small>{%VAT}</small></th>
 							<td class="CartTotal">
