@@ -89,6 +89,13 @@
 		after: '
 					</tbody>
 					<tfoot>
+						<tr class="CartTotal">
+							<th scope="row" colspan="4">{%CheckoutProductsTotal} <br><small>{%VAT} {OrderTaxRate(after:'%')}</small></th>
+							<td class="CartTotal">
+								{OrderSubTotal}<br>
+								<small>{OrderSubtotalTax}</small>
+							</td>
+						</tr>
 						{OrderDiscounts(
 							helper: '{{
 								<tr class="CartTotal">
@@ -103,13 +110,6 @@
 								</tr>
 							}}'
 						)}
-						<tr class="CartTotal">
-							<th scope="row" colspan="4">{%CheckoutProductsTotal} <br><small>{%VAT} {OrderTaxRate(after:'%')}</small></th>
-							<td class="CartTotal">
-								{OrderSubTotal}<br>
-								<small>{OrderSubtotalTax}</small>
-							</td>
-						</tr>
 						{OrderShippingCosts(
 							before: '<tr class="CartTotal"><th scope="row" colspan="4">{%ShippingCosts}: {OrderShippingMethod}<br><small>{%VAT}&nbsp;{OrderShippingCostsTaxRate(after:'%')}</small></th><td class="CartTotal">',
 							after: '<br><small>{OrderShippingCostsTax}</small></td></tr>'
