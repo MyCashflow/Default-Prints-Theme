@@ -87,6 +87,20 @@
 									</tr>
 								}}'
 							)}
+							{OrderCosts(
+								helper: '{{
+									<tr class="CartTotal">
+										<th scope="row" colspan="3">
+											{CostLabel}: {CostName}<br />
+											<small>{%VAT}&nbsp;{CostTaxRate(after:'%')}</small>
+										</th>
+										<td class="CartTotal">
+											{CostAmount}<br />
+											<small>{CostTax}</small>
+										</td>
+									</tr>
+								}}'
+							)}
 							<tr class="CartTotal" id="FullTotal">
 								<th scope="row" colspan="3">
 									{%Total}<br />
